@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+
+package bakery.v1;
+
+option go_package = "github.com/hown3d/pizza-shop-grpc-example/proto/bakery/v1;bakery";
+
+// Protobuf Service of Bakery Microservice
+service BakeryService {
+  // Needs a PizzaRequest and returns a stream of pizzas
+  rpc BakePizza(BakePizzaRequest) returns (stream BakePizzaResponse) {}
+
+}
+
+message BakePizzaRequest {
+  repeated Toppings toppings = 1;
+  //string sauce = 2;
+  string yeet = 3;
+}
+
+
+// Toppings for the pizza
+message Toppings {  
+  // id of the topping
+  // represents the id of the topping in the whole system
+  string id = 1;
+  // name of the topping
+  string name = 2;
+}
+
+// Response to send, when Pizza is baking
+
+message BakePizzaResponse {
+  // id of the pizza
+  // represents the id of the pizza in the whole system
+  string id = 1;
+  enum BakeStatus {
+    BAKE_STATUS_UNSPECIFIED = 0;
+    BAKE_STATUS_PREPARING = 1;
+    BAKE_STATUS_BAKING = 2;
+    BAKE_STATUS_READY = 3;
+  }
+  // current Status of the pizza (PREPARING, BAKING, READY)
+  BakeStatus status = 2;
+}
