@@ -23,8 +23,7 @@ docker_build_with_restart(
     'bakery/build',
   ],
   live_update=[
-    sync('bakery/build', '/app/build'),
-    run('/app/build/server')
+    sync('bakery/', '/app/')
   ],
 )
 
