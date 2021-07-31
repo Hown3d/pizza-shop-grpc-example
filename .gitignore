@@ -17,3 +17,5 @@
 workspace.*
 
 tilt_modules/
+
+*/build/**

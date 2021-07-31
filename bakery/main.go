@@ -14,7 +14,7 @@ import (
 func main() {
 	log := grpclog.NewLoggerV2(os.Stdout, os.Stdout, os.Stdout)
 	//serverPort := os.Getenv("SERVER_PORT")
-	serverPort := "10000"
+	serverPort := "9000"
 	lis, err := net.Listen("tcp", "0.0.0.0:"+serverPort)
 	if err != nil {
 		log.Fatalf("Failed to listen on port %v %v", serverPort, err)
