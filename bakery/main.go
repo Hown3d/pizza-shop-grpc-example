@@ -17,7 +17,7 @@ func main() {
 	serverPort := "9000"
 	lis, err := net.Listen("tcp", "0.0.0.0:"+serverPort)
 	if err != nil {
-		log.Fatalf("Failed to listen on port 9000 %v", err)
+		log.Fatalf("Failed to listen on port %v %v", serverPort, err)
 	}
 
 	grpcServer := grpc.NewServer()
