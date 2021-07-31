@@ -14,8 +14,8 @@ service BakeryService {
 
 message BakePizzaRequest {
   repeated Toppings toppings = 1;
-  //string sauce = 2;
-  string yeet = 3;
+  string sauce = 2;
+  string name = 3;
 }
 
 

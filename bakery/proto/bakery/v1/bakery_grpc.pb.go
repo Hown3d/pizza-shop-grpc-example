@@ -63,22 +63,20 @@ func (x *bakeryServiceBakePizzaClient) Recv() (*BakePizzaResponse, error) {
 }
 
 // BakeryServiceServer is the server API for BakeryService service.
-// All implementations must embed UnimplementedBakeryServiceServer
+// All implementations should embed UnimplementedBakeryServiceServer
 // for forward compatibility
 type BakeryServiceServer interface {
 	// Needs a PizzaRequest and returns a stream of pizzas
 	BakePizza(*BakePizzaRequest, BakeryService_BakePizzaServer) error
-	mustEmbedUnimplementedBakeryServiceServer()
 }
 
-// UnimplementedBakeryServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedBakeryServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedBakeryServiceServer struct {
 }
 
 func (UnimplementedBakeryServiceServer) BakePizza(*BakePizzaRequest, BakeryService_BakePizzaServer) error {
 	return status.Errorf(codes.Unimplemented, "method BakePizza not implemented")
 }
-func (UnimplementedBakeryServiceServer) mustEmbedUnimplementedBakeryServiceServer() {}
 
 // UnsafeBakeryServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to BakeryServiceServer will
