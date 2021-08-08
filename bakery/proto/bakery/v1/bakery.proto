@@ -14,8 +14,7 @@ service BakeryService {
 
 message BakePizzaRequest {
   repeated Toppings toppings = 1;
-  string sauce = 2;
-  string name = 3;
+  string name = 2;
 }
 
 
@@ -29,7 +28,6 @@ message Toppings {
 }
 
 // Response to send, when Pizza is baking
-
 message BakePizzaResponse {
   // id of the pizza
   // represents the id of the pizza in the whole system
@@ -40,6 +38,7 @@ message BakePizzaResponse {
     BAKE_STATUS_BAKING = 2;
     BAKE_STATUS_READY = 3;
   }
+  string name = 2; 
   // current Status of the pizza (PREPARING, BAKING, READY)
-  BakeStatus status = 2;
+  BakeStatus status = 3;
 }

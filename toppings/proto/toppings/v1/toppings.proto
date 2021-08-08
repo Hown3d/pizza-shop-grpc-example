@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+
+package toppings.v1;
+
+option go_package = "github.com/hown3d/pizza-shop-grpc-example/proto/toppings/v1;toppings";
+
+// Protobuf Service of Toppings Microservice
+service ToppingsService {
+  rpc GetTopping(GetToppingRequest) returns (GetToppingResponse) {}
+}
+
+// ToppingRequest for GetTopping
+message GetToppingRequest {  
+  // id of the topping
+  // represents the id of the topping in the whole system
+  string id = 1;
+}
+
+message GetToppingResponse {  
+  // id of the topping
+  // represents the id of the topping in the whole system
+  string id = 1;
+  string name = 2;
+}

@@ -19,7 +19,6 @@ spec:
       annotations:
         kompose.cmd: kompose convert
         kompose.version: 1.23.0 (HEAD)
-      creationTimestamp: null
       labels:
         io.kompose.network/pizzashop: "true"
         io.kompose.service: bakery
@@ -28,7 +27,26 @@ spec:
         - image: bakery-service:v1
           name: bakery
           ports:
-            - containerPort: 9090
-          resources: {}
-      restartPolicy: Always
-status: {}
+            - containerPort: 10000
+          args:
+            - "-postgres-url=postgresql://bakery_user:abcd@postgres:5432/bakery"
+          resources: {}    
+          livenessProbe:
+            failureThreshold: 3
+            exec:
+            # considers both SERVING and NOT SERVING to be a success
+              command: ["/bin/sh", "-c", "/bin/grpc_health_probe -addr=:10000 2>&1 | grep -q SERVING"]
+            initialDelaySeconds: 240
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 15
+          readinessProbe:
+            failureThreshold: 3
+            exec:
+              # fails on any response except SERVING
+              command: ["/bin/grpc_health_probe", "-addr=:10000"]
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 15
+          restartPolicy: Always
